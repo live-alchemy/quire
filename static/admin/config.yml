@@ -18,7 +18,7 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "song"}
+      - {label: "Layout", name: "template", widget: "hidden", default: "song"}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Lyrics", name: "body", widget: "markdown", required: false}
       - {label: "Details", name: "details", widget: "markdown", required: false}

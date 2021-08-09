@@ -1,5 +1,5 @@
 ---
-layout: song
+template: song
 title: The Spider and the Thistle
 details: sing with vigor
 score: ../../static/uploads/exasp-still.png
