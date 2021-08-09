@@ -1,71 +1,34 @@
 import React, { FunctionComponent } from "react";
 import { graphql } from "gatsby";
-import { FluidObject } from "gatsby-image";
-import { BlogPost } from "../../components/blogPost";
 import { SEO } from "../../components/seo";
+
 interface QueryData {
   markdownRemark: {
     html: string;
     frontmatter: {
       title: string;
-      tags: string[];
-      img: {
-        childImageSharp: { fluid: FluidObject };
-      };
-      imgAlt: string;
-      publishedDate: string;
-      description: string;
+      score: string;
+      details: string;
+      finch: string;
+      heron: string;
+      raven: string;
     };
   };
 }
 
 export const pageQuery = graphql`
-  query SongByName($id: String!, $tag: [String!]) {
+  query SongBySlug($id: String!) {
     markdownRemark(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
       html
-      fields {
-        slug
-      }
       frontmatter {
         title
-        description
-        tags
-        img {
-          childImageSharp {
-            fluid(maxWidth: 2400, quality: 90) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-        imgAlt
-        publishedDate
-      }
-    }
-    allMarkdownRemark(
-      limit: 3
-      sort: { fields: [frontmatter___publishedDate], order: DESC }
-      filter: { frontmatter: { tags: { in: $tag } }, id: { ne: $id } }
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            description
-            tags
-            img {
-              childImageSharp {
-                fluid(maxWidth: 370, maxHeight: 220, quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
-        }
+        score
+        details
+        finch
+        heron
+        raven
       }
     }
   }
@@ -81,29 +44,20 @@ export const Page: FunctionComponent<Page> = ({ data }) => {
       html,
       frontmatter: {
         title,
-        tags,
-        imgAlt,
-        description,
-        img: {
-          childImageSharp: { fluid: img },
-        },
-        publishedDate,
+        score,
+        details,
+        finch,
+        heron,
+        raven,
       },
     },
   } = data;
 
   return (
     <>
-      <SEO title={title} image={img.src} description={description} />
-      <BlogPost
-        title={title}
-        tags={tags}
-        img={img}
-        imgAlt={imgAlt}
-        publishedDate={new Date(publishedDate)}
-      >
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-      </BlogPost>
+      <SEO title={title} />
+      <p>{title}</p>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     </>
   );
 };

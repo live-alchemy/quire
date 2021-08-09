@@ -7,7 +7,6 @@ interface PostQuery {
       node: {
         id: string;
         frontmatter: {
-          tags: string[];
           template: string;
         };
         fields: {
@@ -35,7 +34,6 @@ export const createPages = async ({
               slug
             }
             frontmatter {
-              tags
               template
             }
           }
@@ -55,16 +53,13 @@ export const createPages = async ({
   });
 
   const posts = result.data?.allMarkdownRemark.edges;
-  const tagsCollection = new Set<string>();
 
   if (!posts) throw new Error("No blog posts found");
 
   posts.forEach((edge) => {
     const {
       id,
-      frontmatter: { tags },
     } = edge.node;
-    tags.forEach((tag) => tagsCollection.add(tag));
     createPage({
       path: edge.node.fields.slug,
       component: path.resolve(
@@ -72,7 +67,6 @@ export const createPages = async ({
       ),
       context: {
         id,
-        tags,
       },
     });
   });
@@ -90,17 +84,6 @@ export const createPages = async ({
         numPages,
         currentPage: i + 1,
         hasNext: i + 1 < numPages,
-      },
-    });
-  });
-
-  // Create Tags Pages
-  tagsCollection.forEach((tag) => {
-    createPage({
-      path: `/tags/${tag}`,
-      component: path.resolve(`src/createPages/templates/tag.tsx`),
-      context: {
-        tag,
       },
     });
   });
