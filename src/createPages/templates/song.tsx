@@ -24,11 +24,6 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        score
-        details
-        finch
-        heron
-        raven
       }
     }
   }
