@@ -17,8 +17,6 @@ interface PostQuery {
   };
 }
 
-const POST_PER_PAGE = 10;
-
 export const createPages = async ({
   actions,
   graphql,
@@ -52,11 +50,12 @@ export const createPages = async ({
     context: {},
   });
 
-  const posts = result.data?.allMarkdownRemark.edges;
+  const songs = result.data?.allMarkdownRemark.edges;
 
-  if (!posts) throw new Error("No blog posts found");
+  if (!songs) throw new Error("No songs found");
 
-  posts.forEach((edge) => {
+  songs.forEach((edge) => {
+    console.dir(edge)
     const {
       id,
     } = edge.node;
@@ -67,23 +66,6 @@ export const createPages = async ({
       ),
       context: {
         id,
-      },
-    });
-  });
-
-  // Create Blog List Pages
-  const numPages = Math.ceil(posts.length / POST_PER_PAGE);
-
-  Array.from({ length: numPages }).forEach((_, i) => {
-    createPage({
-      path: `/page/${i + 1}`,
-      component: path.resolve(`src/createPages/templates/blog-list.tsx`),
-      context: {
-        limit: POST_PER_PAGE,
-        skip: i * POST_PER_PAGE,
-        numPages,
-        currentPage: i + 1,
-        hasNext: i + 1 < numPages,
       },
     });
   });

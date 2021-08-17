@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "npm-run-all -p dev:*",
-    "dev:storybook": "start-storybook -p 6006 -c .storybook",
+    "storybook": "start-storybook -p 6006 -c .storybook",
     "dev:js": "gatsby develop",
     "dev:css": "postcss src/tailwind.css -o static/css/index.css --watch",
     "start": "concurrently --kill-others \"npm run dev\" \"npm run storybook\"",

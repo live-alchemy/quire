@@ -1,5 +1,3 @@
-import { FluidObject } from "gatsby-image";
-
 type TemplateKey = "blog-post";
 
 export interface Tag {
@@ -7,14 +5,20 @@ export interface Tag {
   href: string;
 }
 
-export interface PostSnippet {
+export interface SongFields {
+  slug: string;
+}
+
+export interface SongFrontMatter {
   title: string;
-  summary: string;
-  href: string;
-  img: FluidObject;
-  imgAlt: string;
-  tags: string[];
-  publishedDate: Date;
+  order?: number;
+  excerpt: string;
+}
+
+export interface SongNode {
+  id: string;
+  fields: SongFields;
+  frontmatter: SongFrontMatter;
 }
 
 export interface BlogPost {

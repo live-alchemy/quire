@@ -1,4 +1,5 @@
 import React, { useState, FunctionComponent } from "react";
+import { Link } from "gatsby";
 
 export interface DropdownItem {
   label: string;
@@ -150,11 +151,12 @@ export const Header: FunctionComponent<Header> = ({ menuItems, logo }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="lg:w-0 lg:flex-1">
-            <a href="/" className="flex">
+            <Link to="/" className="flex">
               {logo}
-            </a>
+            </Link>
           </div>
-          <div className="-mr-2 -my-2 md:hidden">
+
+          <div className="-mr-2 -my-2 hidden">
             <button
               onClick={toggleMobileDrawer}
               type="button"
@@ -175,7 +177,8 @@ export const Header: FunctionComponent<Header> = ({ menuItems, logo }) => {
               </svg>
             </button>
           </div>
-          <nav className="hidden md:flex space-x-10">
+
+          <nav className="hidden space-x-10">
             {menuItems.map((menuItem, index) =>
               isMenuItemWithDropdown(menuItem) ? (
                 <FlyoutMenu {...menuItem} key={index} />
@@ -190,9 +193,11 @@ export const Header: FunctionComponent<Header> = ({ menuItems, logo }) => {
               )
             )}
           </nav>
+
         </div>
+
       </div>
-      {mobileDrawerOn && (
+      {mobileDrawerOn && 0 && (
         <div
           className={`duration-100 ease-in absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-50`}
         >
