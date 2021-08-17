@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { graphql } from "gatsby";
-import { Song } from "../../components/Song";
+import { Song } from "../../components/song";
 import { Layout } from "../../components/layout";
 import { SongNode } from "../../types";
 import { SEO } from "../../components/seo";
