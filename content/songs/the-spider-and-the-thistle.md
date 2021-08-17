@@ -7,6 +7,8 @@ finch: ../../static/uploads/02-the-great-liberation.m4a
 heron: ../../static/uploads/02-the-great-liberation.m4a
 raven: ../../static/uploads/02-the-great-liberation.m4a
 ---
-The Spider and the Thistle
-
 Never could agree
+
+on who was being prickly
+
+and who was needy!
